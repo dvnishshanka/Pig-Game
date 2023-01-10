@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pig Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 class="heading">
+      <span style="font-size: 60px">🐷</span>
+      Pig Game
+    </h1>
+    <div class="game-wrapper">
+      <div class="pl-wrapper" style="border-radius: 5px 0px 0px 5px">
+        <div
+          style="
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+          "
+        >
+          <h2>PLAYER 1</h2>
+          <h1 id="total-score-pl1" style="font-size: 40px">0</h1>
+        </div>
+        <div class="current-score-wrapper">
+          <p>CURRENT</p>
+          <p id="current-score-pl1">0</p>
+        </div>
+      </div>
+      <div class="common-ins pl-wrapper">
+        <button class="label new-game">
+          <span style="font-size: 20px">🔃</span> NEW GAME
+        </button>
+        <img class="dice hidden" src="" alt="" />
+        <div style="display: flex; align-items: center; flex-direction: column">
+          <button class="label roll" style="margin-bottom: 20px">
+            <span style="font-size: 20px">🎲</span> ROLL DICE</button
+          ><br />
+          <button class="label hold">
+            <span style="font-size: 20px">🎮</span> HOLD
+          </button>
+        </div>
+      </div>
+      <div class="pl-wrapper" style="border-radius: 0px 5px 5px 0px">
+        <div
+          style="
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+          "
+        >
+          <h2>PLAYER 2</h2>
+          <h1 id="total-score-pl2" style="font-size: 40px">0</h1>
+        </div>
+        <div class="current-score-wrapper">
+          <p>CURRENT</p>
+          <p id="current-score-pl2">0</p>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

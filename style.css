@@ -1,0 +1,98 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-image: linear-gradient(to bottom right, #9fffcb, rgb(235 218 224));
+  height: 100vh;
+}
+
+h1 {
+  padding-bottom: 20px;
+  font-size: 30px;
+}
+
+.heading {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.game-wrapper {
+  margin: auto;
+  padding: 30px 40px;
+  height: 55vh;
+  width: 55vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background: linear-gradient(
+    to right,
+    #004e64 0%,
+    #004e64 50%,
+    #004e6433 50%,
+    #004e6433 100%
+  );
+}
+
+.plTwo-active {
+  background: linear-gradient(
+    to right,
+    #004e6433 0%,
+    #004e6433 50%,
+    #004e64 50%,
+    #004e64 100%
+  );
+}
+
+.pl-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  color: white;
+}
+
+.current-score-wrapper {
+  margin-top: 25px;
+  background-color: rgb(209, 67, 90);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 3px;
+  color: white;
+  font-size: medium;
+}
+
+#current-score-pl2,
+#current-score-pl1 {
+  font-size: larger;
+}
+
+#total-score-pl1,
+#total-score-pl2 {
+  color: white;
+}
+
+.label {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 15px;
+  background-color: rgb(224, 214, 214, 0.8);
+  padding: 5px 10px;
+  box-shadow: 1px 1px 1px 0.5px rgb(173 157 157);
+  border: none;
+}
+
+.dice {
+  width: 60px;
+}
+
+.hidden {
+  display: none;
+}
