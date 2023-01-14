@@ -1,82 +1,79 @@
 "use strict";
 
 let currentScore = 0;
-let scorePl1 = 0;
-let scorePl2 = 0;
-let isPlayerOneActive = true;
+const score = [0, 0];
+let activePlayer = 1;
 
 const diceImageElement = document.querySelector(".dice");
 const newElement = document.querySelector(".new-game");
-const currentScorePl1Element = document.getElementById("current-score-pl1");
-const currentScorePl2Element = document.getElementById("current-score-pl2");
-const scorePl1Element = document.getElementById("total-score-pl1");
-const scorePl2Element = document.getElementById("total-score-pl2");
 const gameWrapperElement = document.querySelector(".game-wrapper");
+const popupElement = document.querySelector(".popup");
+const overlayElement = document.querySelector(".show");
+const popupDescElement = document.querySelector(".popup-description");
 
-document
-  .querySelector(".roll")
-  .addEventListener("click", function rollDice(player) {
-    const diceNo = Math.trunc(Math.random() * 6 + 1);
+const resetPlayer = (player) => {
+  currentScore = 0;
+  document.getElementById(`total-score-pl${player}`).innerText =
+    score[player - 1];
+  document.getElementById(`current-score-pl${player}`).textContent =
+    currentScore;
+};
 
-    if (isPlayerOneActive) {
-      if (diceNo === 1) {
-        currentScore = 0;
+document.querySelector(".roll").addEventListener("click", function rollDice() {
+  const diceNo = Math.trunc(Math.random() * 6 + 1);
 
-        //switch to the other player
-        isPlayerOneActive = false;
-        gameWrapperElement.classList.add("plTwo-active");
-      } else {
-        currentScore += diceNo;
-      }
-      currentScorePl1Element.textContent = currentScore;
-    } else {
-      if (diceNo === 1) {
-        currentScore = 0;
+  if (diceNo === 1) {
+    currentScore = 0;
+    resetPlayer(activePlayer);
+    activePlayer = activePlayer === 1 ? 2 : 1;
+    gameWrapperElement.classList.toggle("pl2-active");
+  } else {
+    currentScore += diceNo;
+  }
+  document.getElementById(`current-score-pl${activePlayer}`).textContent =
+    currentScore;
 
-        //switch to the other player
-        isPlayerOneActive = true;
-        gameWrapperElement.classList.remove("plTwo-active");
-      } else {
-        currentScore += diceNo;
-      }
-      currentScorePl2Element.innerText = currentScore;
-    }
-
-    if (diceImageElement.classList.contains("hidden"))
-      diceImageElement.classList.remove("hidden");
-    diceImageElement.src = `assets/dice-${diceNo}.png`;
-    diceImageElement.alt = `dice-${diceNo}`;
-  });
+  diceImageElement.classList.remove("hidden");
+  diceImageElement.src = `assets/dice-${diceNo}.png`;
+  diceImageElement.alt = `dice-${diceNo}`;
+});
 
 document.querySelector(".hold").addEventListener("click", function () {
-  if (isPlayerOneActive) {
-    scorePl1 += currentScore;
-    currentScore = 0;
-    scorePl1Element.innerText = scorePl1;
-    currentScorePl1Element.textContent = currentScore;
-    isPlayerOneActive = false;
-  } else {
-    scorePl2 += currentScore;
-    currentScore = 0;
-    scorePl2Element.innerText = scorePl2;
-    currentScorePl2Element.innerText = currentScore;
-    isPlayerOneActive = true;
-  }
-  gameWrapperElement.classList.toggle("plTwo-active");
-});
-
-newElement.addEventListener("click", function () {
+  score[activePlayer - 1] += currentScore;
   currentScore = 0;
-  scorePl1 = 0;
-  scorePl2 = 0;
-  isPlayerOneActive = true;
-  scorePl1Element.innerText = scorePl1;
-  currentScorePl1Element.textContent = currentScore;
-  scorePl2Element.innerText = scorePl2;
-  currentScorePl2Element.innerText = currentScore;
-  if (!diceImageElement.classList.contains("hidden"))
-    diceImageElement.classList.add("hidden");
 
-  if (gameWrapperElement.classList.contains("plTwo-active"))
-    diceImageElement.classList.remove("plTwo-active");
+  document.getElementById(`total-score-pl${activePlayer}`).innerText =
+    score[activePlayer - 1];
+  document.getElementById(`current-score-pl${activePlayer}`).textContent =
+    currentScore;
+  activePlayer = activePlayer === 1 ? 2 : 1;
+
+  if (score[0] >= 100 || score[1] >= 100) {
+    popupElement.style.display = "block";
+    overlayElement.classList.add("overlay");
+    document.querySelector(".hold").disabled = true;
+    document.querySelector(".roll").disabled = true;
+    popupDescElement.innerText =
+      score[0] > score[2] ? "🎈Player 1 won!🎈🎈" : "🎈Player 2 won!🎈🎈";
+  } else {
+    gameWrapperElement.classList.toggle("pl2-active");
+  }
 });
+
+const newGame = function () {
+  score[0] = 0;
+  score[1] = 0;
+  activePlayer = 1;
+  resetPlayer(1);
+  resetPlayer(2);
+  popupElement.style.display = "none";
+  overlayElement.classList.remove("overlay");
+  diceImageElement.classList.add("hidden");
+  document.querySelector(".hold").disabled = false;
+  document.querySelector(".roll").disabled = false;
+  gameWrapperElement.classList.remove("pl2-active");
+};
+
+newElement.addEventListener("click", newGame);
+
+document.getElementById("close").addEventListener("click", newGame);

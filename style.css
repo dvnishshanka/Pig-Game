@@ -35,7 +35,7 @@ h1 {
   );
 }
 
-.plTwo-active {
+.pl2-active {
   background: linear-gradient(
     to right,
     #004e6433 0%,
@@ -43,6 +43,36 @@ h1 {
     #004e64 50%,
     #004e64 100%
   );
+}
+
+.overlay {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  height: 100%;
+  width: 100%;
+}
+
+.popup {
+  display: none;
+  background-color: white;
+  width: 400px;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  border-radius: 20px;
+  box-shadow: inset;
+  padding: auto;
+  height: 100px;
+  position: fixed;
+  bottom: 50%;
+  left: 40%;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 29;
 }
 
 .pl-wrapper {
@@ -87,6 +117,16 @@ h1 {
   padding: 5px 10px;
   box-shadow: 1px 1px 1px 0.5px rgb(173 157 157);
   border: none;
+  cursor: pointer;
+}
+
+#close {
+  cursor: pointer;
+  font-size: 12px;
+  position: absolute;
+  right: 20px;
+  top: 5px;
+  padding-bottom: 2px;
 }
 
 .dice {
