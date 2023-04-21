@@ -54,7 +54,7 @@ document.querySelector(".hold").addEventListener("click", function () {
     document.querySelector(".hold").disabled = true;
     document.querySelector(".roll").disabled = true;
     popupDescElement.innerText =
-      score[0] > score[2] ? "🎈Player 1 won!🎈🎈" : "🎈Player 2 won!🎈🎈";
+      score[0] > score[1] ? "🎈Player 1 won!🎈🎈" : "🎈Player 2 won!🎈🎈";
   } else {
     gameWrapperElement.classList.toggle("pl2-active");
   }
